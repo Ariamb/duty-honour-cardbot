@@ -40,4 +40,9 @@ for(let i = 1; i <= 4; i++){
     }
 }
 
-module.exports = deck
+const joker = {
+    face: 'J',
+    number: 0,
+    suit: 'Joker'
+}
+module.exports = { deck, joker }
