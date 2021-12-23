@@ -1,0 +1,24 @@
+{
+  "name": "duty-honour-cardbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ariamb/duty-honour-cardbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ariamb/duty-honour-cardbot/issues"
+  },
+  "homepage": "https://github.com/Ariamb/duty-honour-cardbot#readme",
+  "dependencies": {
+    "bitfield": "^4.0.0",
+    "discord.js": "^12.2.0",
+    "dotenv": "^10.0.0"
+  }
+}
