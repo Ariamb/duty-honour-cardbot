@@ -1,4 +1,6 @@
-const deck = []
+//const deck = []
+const dict = {}
+let index = 1
 for(let i = 1; i <= 4; i++){
     let suit
     switch (i){
@@ -12,7 +14,7 @@ for(let i = 1; i <= 4; i++){
             suit = 'Diamonds'
             break
         default:
-            suit = 'Club'
+            suit = 'Clubs'
     } 
     for(let j = 1; j <= 13; j++){
         let number
@@ -32,17 +34,39 @@ for(let i = 1; i <= 4; i++){
                 default:
                     number = 'A'
             }   
-        deck.push({
+        dict[index] = {
             face: number + suit.charAt(0),
             number: j,
             suit: suit
-        })
+        }
+        /*
+        deck.push({
+            "index": index,
+            face: number + suit.charAt(0),
+            number: j,
+            suit: suit
+        })*/
+        index++
     }
 }
 
+/*
 const joker = {
+    "index": 0,
     face: 'J',
     number: 0,
     suit: 'Joker'
 }
-module.exports = { deck, joker }
+*/
+dict[0] = {
+    face: 'J',
+    number: 0,
+    suit: 'Joker'
+
+}
+/*
+const pack = {
+    deck: deck,
+    joker: joker
+}*/
+module.exports = dict

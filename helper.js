@@ -1,7 +1,27 @@
 module.exports = {
-    randomInt: function(max) { //1 to max, max included
-        return Math.floor(Math.random() * (max) + 1)
+    randomInt: function(min, max) { //min to max, both included
+        return Math.floor(Math.random() * (max + 1 - min) + min)
     },
+    shuffle: function(array, limit, min){
+        let m = array.length - 1
+          
+        // While there remain elements to shuffle…
+        while (m) {
+            // Pick a remaining element…
+            //Math.random * (array.length - min + 1) + min
+            const i = Math.floor(Math.random() * (m-- - min) + min)
+          
+            // And swap it with the current element.
+            const t = array[m]
+            array[m] = array[i]
+            array[i] = t
+            if(limit === 0)
+                break
+            limit--
+        }
+        return array
+    },
+
     cardParse: function(abv){
         const cardRegex = /((([2-9]|(10))|(J|Q|K|A))(S|H|C|D)|J)/
         if(!cardRegex.test(abv)){

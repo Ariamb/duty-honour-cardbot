@@ -2,35 +2,39 @@ require('dotenv').config()
 
 const discord = require('discord.js')
 const client = new discord.Client()
+const dict = require('./deck')
+const overturner = require('./src/overturner')
 
-const deck = require('./deck')
+const overturnRegex = /overturn(\ )*(?<amount>(\d)+(\ )*)+/g
+const numberRegex = /(\d)+/g
+
+const hello = overturnRegex.exec('overturn 5 4 3 2 1')
+console.log(hello[0])
+console.log(hello[0].match(numberRegex))
+console.log(hello)
+
 
 client.on('ready', () => {
     console.log('logged in as ' + client.user.tag)
-    console.log(deck)
+    console.log(overturner.overturn(5))
 })
 
+console.log(dict)
 
 client.on('message', msg => {
     if(msg.content.startsWith('!')){
         const cmd = msg.content.replace('!', '')
-        console.log('here we go')
         if(cmd.startsWith('overturn')){
-        } else if(cmd.startsWith('create deck')){
-            const deckType = cmd.replace('create deck', '').replace(/(\ )*/, '').toLowerCase()
-            if(deckType === 'gm'){
-                msg.reply('all hail, DM of losers!')
-                //new GMDeck();
-            } else if(deckType === 'player'){
-                msg.reply('the players are (the players are dead!)')
-                //new playerDeck()
-            }
-
-        } else if(cmd.startsWith('test')){
+            const amount = parseInt(cmd.replace('overturn', ''))
+            console.log(amount)
+            if(isNaN(amount))
+                msg.reply(`formatting error.`)
+            else
+                msg.reply(`im supposed to overturn ${amount} cards, but i'm not ready yet!`)
+        } else if(cmd.startsWith('cof')){
 
         }
         
     }
 })
-
 client.login(process.env.BOT_TOKEN)
