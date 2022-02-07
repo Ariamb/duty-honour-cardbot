@@ -20,27 +20,50 @@ module.exports = {
         return array
     },
 
-    replyBuilder: function(){
+    simpleReplyBuilder: function(cardArray){
+        let reply = ``
+        for(let i = 0; i < cardArray.length; i++){
 
-    },
-    testSuccess: function(){
+            if(cardArray.length > 1)
+                reply += `hand number ${i + 1}: \n`
+        
+            for(let j = 0; j < cardArray[i].length; j++)
+                reply += `${cardArray[i][j].face} `
 
+            reply += `\n`
+        }
+        return reply
     },
+    cofReplyBuilder: function(cardArray){
+        let reply = `The card of fate is ${cardArray[0][0].face}!`
+
+        return reply
+    },
+
     cardParse: function(abv){
         const cardRegex = /((([2-9]|(10))|(J|Q|K|A))(S|H|C|D)|J)/
         if(!cardRegex.test(abv)){
             return undefined
         }
-        const split = [...abv]
-        if(split == undefined){
-            return undefined
-        }
-        if(split.length === 1 && split[0] === 'J'){
+        const split = []
+
+        switch(abv.length){
+            case 1:
                 return {
                     face: 'J',
                     number: 0,
                     suit: 'Joker'
                 }
+            case 2:
+                split.push(abv.charAt(0))
+                split.push(abv.charAt(1))
+                break
+            case 3:
+                split.push(10)
+                split.push(abv.charAt(2))
+                break
+            default:
+                return undefined
         }
         let suit
         switch (split[1]) {
@@ -80,7 +103,7 @@ module.exports = {
         }
 
         return {
-            face: 'J',
+            face: abv,
             number: number,
             suit: suit
         }
