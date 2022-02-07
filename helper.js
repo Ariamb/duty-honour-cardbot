@@ -2,26 +2,30 @@ module.exports = {
     randomInt: function(min, max) { //min to max, both included
         return Math.floor(Math.random() * (max + 1 - min) + min)
     },
-    shuffle: function(array, limit, min){
+    shuffle: function(array, limit = 52, min = 0){  //fisher yates algorithm
         let m = array.length - 1
           
-        // While there remain elements to shuffle…
-        while (m) {
+        // Improving the algorithm so it won't waste time shuffling cards that won't be used
+        while (limit > 0) { 
             // Pick a remaining element…
-            //Math.random * (array.length - min + 1) + min
+
+            // "min" is to keep N elements from the start of the array out of the shuffling
             const i = Math.floor(Math.random() * (m-- - min) + min)
           
-            // And swap it with the current element.
             const t = array[m]
             array[m] = array[i]
             array[i] = t
-            if(limit === 0)
-                break
             limit--
         }
         return array
     },
 
+    replyBuilder: function(){
+
+    },
+    testSuccess: function(){
+
+    },
     cardParse: function(abv){
         const cardRegex = /((([2-9]|(10))|(J|Q|K|A))(S|H|C|D)|J)/
         if(!cardRegex.test(abv)){
